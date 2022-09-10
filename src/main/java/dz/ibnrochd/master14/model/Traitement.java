@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,9 +27,6 @@ public class Traitement implements Serializable {
     @OneToMany(mappedBy = "traitement")
     private List<LigneConsultation> ligne_consultation = new ArrayList<>();
     
-    @ManyToMany
-    @JoinColumn(name = "consultation", nullable = false)
-    private Consultation consultation;
     
 /////////////////////////////////////////////////////////
     
@@ -39,6 +34,7 @@ public class Traitement implements Serializable {
 	}
 
 	public Traitement(int id, String nom) {
+		super();
 		this.id = id;
 		this.nom = nom;
 	}
@@ -67,14 +63,6 @@ public class Traitement implements Serializable {
 
 	public void setLigne_consultation(List<LigneConsultation> ligne_consultation) {
 		this.ligne_consultation = ligne_consultation;
-	}
-
-	public Consultation getConsultation() {
-		return consultation;
-	}
-
-	public void setConsultation(Consultation consultation) {
-		this.consultation = consultation;
 	}
 
 	public static long getSerialversionuid() {
